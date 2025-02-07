@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="src\output.css">
+</head>
+<body class="text-white font-jura h-dvh flex justify-center items-center">
+    <main id="musicPlayer" class="relative px-4 pt-3 pb-3 flex justify-center flex-wrap w-[270px] h-[500px] bg-linear-[170deg,rgba(136,87,71,1)_0%,rgba(106,52,35,1)_100%] rounded-3xl cursor-pointer z-50">
+        <div class="w-full flex justify-between text-white/70">
+            <div class="flex justify-between">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
+                </svg>
+                <h6>Music Player</h6>
+            </div>
+            <div class="flex justify-between">
+                <svg id="closeButton"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </div>
+        </div>
+        <div class="flex w-[180px] h-[180px] justify-center items-center rounded-full bg-[#523025]">
+            <img class="rounded-full w-[170px] h-[170px]" src="src/img/475b4f63ee6fd0e40449e60aca79560f945.jpg" alt="">
+        </div>
+        <h1 class="w-full whitespace-nowrap text-2xl overflow-hidden font-bold">Soojehat Tekrarie</h1>
+        <h2 class="w-full whitespace-nowrap text-1xl overflow-hidden">Sirvan Khosravi</h2>
+        <input id="seekBar" class="w-full appearance-none bg-[#B1B1B1] h-1 cursor-pointer" type="range" value="0" step="2">
+        <div class="w-40 flex justify-between items-center">
+            <div id="backwardBtn" class="flex justify-center items-center rounded-full w-[35px] h-[35px] bg-white/25">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 opacity-50">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+                </svg>
+            </div>
+            <div onclick="playPause()" class="flex justify-center items-center rounded-full w-[60px] h-[60px] bg-white/25">
+                <svg id="playButton" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12 opacity-50">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+                </svg>
+                <svg id="pauseButton" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12 opacity-50 hidden">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                </svg>  
+            </div>
+            <div id="forwardBtn" class="flex justify-center items-center rounded-full w-[35px] h-[35px] bg-white/25">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 opacity-50">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />
+                </svg>
+            </div>
+        </div>
+        <audio id="player">
+            <source src="src/music/Sirvan Khosravi-Soojehat Tekrarie.mp3" type="audio/mpeg">
+        </audio>
+        <div  id="aboutButton" class="w-full flex flex-wrap items-center align-middle justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg> 
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 hidden">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+            </svg>
+        </div> 
+        <div id="aboutSection" class="bg-[#936b5f] w-[270px] h-[100px] flex rounded-b-2xl justify-center cursor-pointer flex-wrap pt-[20px] absolute top-[395px] transition-all duration-500 opacity-0 -z-10">
+            <h1 class="w-full text-center font-bold">Developed by Hamed Moradi</h1>
+            <div class="flex w-[200px] justify-between align-middle">
+                <a href="https://github.com/hamedmoradidev">GitHub</a>
+                <a href="https://www.linkedin.com/in/haamedmoradiidev/">Linkedin</a>
+                <a href="https://instagram.com/hamed.moradi.dev">Instagram</a>
+            </div>
+        </div>    
+    </main>
+
+    <script>
+        const playerTag=document.getElementById("player")
+        const play=document.getElementById("playButton")
+        const pause=document.getElementById("pauseButton")
+        const close=document.getElementById("closeButton")
+        const seek=document.getElementById("seekBar")
+        const forwardBtn=document.getElementById("forwardBtn")
+        const backwardBtn=document.getElementById("backwardBtn")
+        const aboutButton=document.getElementById("aboutButton")
+        const aboutSection=document.getElementById("aboutSection")
+        const musicPlayer=document.getElementById("musicPlayer")
+        let flag=false
+        playerTag.onloadedmetadata=function(){
+            seek.max=playerTag.duration
+            console.log(seek.max)
+
+            seek.value=playerTag.currentTime
+            console.log(playerTag.duration)
+            console.log(playerTag.currentTime)
+
+        }
+        function playPause(){
+            if(play.classList.contains("hidden")){
+                pause.classList.add("hidden")
+                play.classList.remove("hidden")
+                playerTag.pause()
+            }else{
+                play.classList.add("hidden")
+                pause.classList.remove("hidden")
+                playerTag.play()
+            }
+        }
+        close.addEventListener("click",()=>{
+            window.close()
+        })
+        if(playerTag.play()){
+            setInterval(() => {
+                seek.value=playerTag.currentTime
+            }, 500);
+        }
+        seek.onchange=function(){
+            playerTag.currentTime=seek.value
+            playerTag.play()
+            if(play.classList.contains("hidden")){
+                play.classList.add("hidden")
+                pause.classList.remove("hidden")
+            }else{
+                play.classList.add("hidden")
+                pause.classList.remove("hidden")
+            }
+            console.log(playerTag.currentTime)
+        }
+        playerTag.onended = function(){
+            playerTag.currentTime=0
+            playPause()
+        }
+        forwardBtn.addEventListener("click",()=>{
+            seek.value += 2
+            playerTag.currentTime=seek.value
+        })
+        backwardBtn.addEventListener("click",()=>{
+            seek.value -= 20
+            playerTag.currentTime=seek.value
+        })
+        aboutButton.addEventListener("click",()=>{
+            if(!flag){
+                aboutSection.style.top="475px"
+                aboutSection.classList.toggle("opacity-0")
+                flag = !flag
+            }else{
+                aboutSection.style.top="375px"
+                aboutSection.classList.toggle("opacity-0")
+                flag = !flag
+            }
+            aboutButton.children[0].classList.toggle("hidden")
+            aboutButton.children[1].classList.toggle("hidden")
+        })
+    </script>
+</body>
+</html>
